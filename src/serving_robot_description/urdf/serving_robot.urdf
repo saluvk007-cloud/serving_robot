@@ -1,0 +1,1200 @@
+<?xml version="1.0"?>
+
+<robot name="serving_robot">
+
+    <!-- ===================================== -->
+<!-- Robot Reference Frame                 -->
+<!-- ===================================== -->
+
+<link name="base_link"/>
+<!-- ===================================== -->
+<!-- Bottom Plate                          -->
+<!-- ===================================== -->
+
+<link name="bottom_plate_link">
+
+    <!-- Visual -->
+    <visual>
+
+        <origin xyz="0 0 0"
+                rpy="0 0 0"/>
+
+        <geometry>
+
+            <cylinder radius="0.16"
+                      length="0.008"/>
+
+        </geometry>
+
+        <material name="blue">
+
+            <color rgba="0.2 0.4 0.9 1"/>
+
+        </material>
+
+    </visual>
+
+    <!-- Collision -->
+    <collision>
+
+        <origin xyz="0 0 0"
+                rpy="0 0 0"/>
+
+        <geometry>
+
+            <cylinder radius="0.16"
+                      length="0.008"/>
+
+        </geometry>
+
+    </collision>
+
+    <!-- Inertial -->
+    <inertial>
+
+        <origin xyz="0 0 0"/>
+
+        <mass value="0.60"/>
+
+        <inertia
+            ixx="0.0026"
+            iyy="0.0026"
+            izz="0.0077"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+
+    </inertial>
+
+</link>
+<!-- ===================================== -->
+<!-- Base -> Bottom Plate                  -->
+<!-- ===================================== -->
+
+<joint name="base_to_bottom_plate"
+       type="fixed">
+
+    <parent link="base_link"/>
+
+    <child link="bottom_plate_link"/>
+
+    <origin xyz="0 0 0.044"
+            rpy="0 0 0"/>
+
+</joint>
+
+<!-- ========================= -->
+<!-- Left Wheel               -->
+<!-- ========================= -->
+
+<link name="left_wheel_link">
+
+    <visual>
+
+        <origin xyz="0 0 0"
+                rpy="1.5708 0 0"/>
+
+        <geometry>
+
+            <cylinder radius="0.04"
+                      length="0.03"/>
+
+        </geometry>
+
+        <material name="black">
+
+            <color rgba="0.1 0.1 0.1 1"/>
+
+        </material>
+
+    </visual>
+
+    <collision>
+
+        <origin xyz="0 0 0"
+                rpy="1.5708 0 0"/>
+
+        <geometry>
+
+            <cylinder radius="0.04"
+                      length="0.03"/>
+
+        </geometry>
+
+    </collision>
+
+    <inertial>
+
+        <origin xyz="0 0 0"/>
+
+        <mass value="0.20"/>
+
+        <inertia
+            ixx="0.00011"
+            iyy="0.00011"
+            izz="0.00016"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+
+    </inertial>
+
+</link>
+
+<joint name="left_wheel_joint"
+       type="continuous">
+
+    <parent link="bottom_plate_link"/>
+
+    <child link="left_wheel_link"/>
+
+    <origin xyz="0.03 0.14 -0.04"
+            rpy="0 0 0"/>
+
+    <axis xyz="0 1 0"/>
+
+</joint>
+
+<!-- ========================= -->
+<!-- Right Wheel              -->
+<!-- ========================= -->
+
+<link name="right_wheel_link">
+
+    <visual>
+
+        <origin xyz="0 0 0"
+                rpy="1.5708 0 0"/>
+
+        <geometry>
+
+            <cylinder radius="0.04"
+                      length="0.03"/>
+
+        </geometry>
+
+        <material name="black">
+
+            <color rgba="0.1 0.1 0.1 1"/>
+
+        </material>
+
+    </visual>
+
+    <collision>
+
+        <origin xyz="0 0 0"
+                rpy="1.5708 0 0"/>
+
+        <geometry>
+
+            <cylinder radius="0.04"
+                      length="0.03"/>
+
+        </geometry>
+
+    </collision>
+
+    <inertial>
+
+        <origin xyz="0 0 0"/>
+
+        <mass value="0.20"/>
+
+        <inertia
+            ixx="0.00011"
+            iyy="0.00011"
+            izz="0.00016"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+
+    </inertial>
+
+</link>
+
+<joint name="right_wheel_joint"
+       type="continuous">
+
+    <parent link="bottom_plate_link"/>
+
+    <child link="right_wheel_link"/>
+
+    <origin xyz="0.03 -0.14 -0.04"
+            rpy="0 0 0"/>
+
+    <axis xyz="0 1 0"/>
+
+</joint>
+<!-- ===================================== -->
+<!-- Caster Mount                          -->
+<!-- ===================================== -->
+
+<link name="caster_mount_link">
+
+    <visual>
+
+        <origin xyz="0 0 0"/>
+
+        <geometry>
+            <box size="0.05 0.04 0.03"/>
+        </geometry>
+
+        <material name="dark_gray">
+            <color rgba="0.25 0.25 0.25 1"/>
+        </material>
+
+    </visual>
+
+    <collision>
+
+        <origin xyz="0 0 0"/>
+
+        <geometry>
+            <box size="0.05 0.04 0.03"/>
+        </geometry>
+
+    </collision>
+
+    <inertial>
+
+        <origin xyz="0 0 0"/>
+
+        <mass value="0.05"/>
+
+        <inertia
+            ixx="0.00002"
+            iyy="0.00002"
+            izz="0.00002"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+
+    </inertial>
+
+</link>
+<joint name="bottom_to_caster_mount_joint"
+       type="fixed">
+
+    <parent link="bottom_plate_link"/>
+
+    <child link="caster_mount_link"/>
+
+    <origin xyz="-0.12 0 -0.019"
+            rpy="0 0 0"/>
+
+</joint>
+<!-- ===================================== -->
+<!-- Caster Wheel                          -->
+<!-- ===================================== -->
+
+<link name="caster_wheel_link">
+
+    <visual>
+
+        <geometry>
+            <sphere radius="0.025"/>
+        </geometry>
+
+        <material name="gray">
+            <color rgba="0.7 0.7 0.7 1"/>
+        </material>
+
+    </visual>
+
+    <collision>
+
+        <geometry>
+            <sphere radius="0.025"/>
+        </geometry>
+
+    </collision>
+
+    <inertial>
+
+        <mass value="0.08"/>
+
+        <origin xyz="0 0 0"/>
+
+        <inertia
+            ixx="0.00002"
+            iyy="0.00002"
+            izz="0.00002"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+
+    </inertial>
+
+</link>
+
+<joint name="caster_wheel_joint"
+       type="continuous">
+
+    <parent link="caster_mount_link"/>
+
+    <child link="caster_wheel_link"/>
+
+    <origin xyz="0 0 -0.040"
+            rpy="0 0 0"/>
+
+    <axis xyz="0 1 0"/>
+
+</joint>
+<!-- ===================================== -->
+<!-- Battery Pack                          -->
+<!-- ===================================== -->
+
+<link name="battery_link">
+
+    <visual>
+
+        <geometry>
+            <box size="0.070 0.060 0.020"/>
+        </geometry>
+
+        <material name="battery_black">
+            <color rgba="0.15 0.15 0.15 1"/>
+        </material>
+
+    </visual>
+
+    <collision>
+
+        <geometry>
+            <box size="0.070 0.060 0.020"/>
+        </geometry>
+
+    </collision>
+
+    <inertial>
+
+        <origin xyz="0 0 0"/>
+
+        <mass value="0.25"/>
+
+        <inertia
+            ixx="0.00011"
+            iyy="0.00013"
+            izz="0.00020"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+
+    </inertial>
+
+</link>
+
+<joint name="bottom_plate_to_battery_joint"
+       type="fixed">
+
+    <parent link="bottom_plate_link"/>
+
+    <child link="battery_link"/>
+
+    <!-- Center of bottom floor -->
+    <origin xyz="0.03 0 0.014"
+            rpy="0 0 0"/>
+
+</joint>
+<!-- ===================================== -->
+<!-- L298N Motor Driver                    -->
+<!-- ===================================== -->
+
+<link name="l298n_driver_link">
+
+    <visual>
+
+        <geometry>
+            <box size="0.050 0.045 0.015"/>
+        </geometry>
+
+        <material name="driver_blue">
+            <color rgba="0.1 0.3 0.8 1"/>
+        </material>
+
+    </visual>
+
+    <collision>
+
+        <geometry>
+            <box size="0.050 0.045 0.015"/>
+        </geometry>
+
+    </collision>
+
+    <inertial>
+
+        <origin xyz="0 0 0"/>
+
+        <mass value="0.03"/>
+
+        <inertia
+            ixx="0.000008"
+            iyy="0.000010"
+            izz="0.000015"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+
+    </inertial>
+
+</link>
+
+<joint name="bottom_plate_to_l298n_joint"
+       type="fixed">
+
+    <parent link="bottom_plate_link"/>
+
+    <child link="l298n_driver_link"/>
+
+    <!-- Beside battery -->
+    <origin xyz="-0.05 0 0.0115"
+            rpy="0 0 0"/>
+
+</joint>
+<!-- ===================================== -->
+<!-- Front Left Pillar                     -->
+<!-- ===================================== -->
+
+<link name="front_left_pillar_link">
+
+    <!-- Visual -->
+    <visual>
+
+        <geometry>
+            <cylinder radius="0.005"
+                      length="0.08"/>
+        </geometry>
+
+        <material name="silver">
+            <color rgba="0.8 0.8 0.8 1"/>
+        </material>
+
+    </visual>
+
+    <!-- Collision -->
+    <collision>
+
+        <geometry>
+            <cylinder radius="0.005"
+                      length="0.08"/>
+        </geometry>
+
+    </collision>
+
+    <!-- Inertial -->
+    <inertial>
+
+        <origin xyz="0 0 0"/>
+
+        <mass value="0.03"/>
+
+        <inertia
+            ixx="0.000016"
+            iyy="0.000016"
+            izz="0.00000038"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+
+    </inertial>
+
+</link>
+
+<joint name="bottom_to_front_left_pillar_joint"
+       type="fixed">
+
+    <parent link="bottom_plate_link"/>
+
+    <child link="front_left_pillar_link"/>
+
+    <!-- Front Left -->
+    <origin xyz="0.10 0.10 0.044"
+            rpy="0 0 0"/>
+
+</joint>
+<!-- ===================================== -->
+<!-- Front Right Pillar                    -->
+<!-- ===================================== -->
+
+<link name="front_right_pillar_link">
+
+    <visual>
+        <geometry>
+            <cylinder radius="0.005"
+                      length="0.08"/>
+        </geometry>
+
+        <material name="silver">
+            <color rgba="0.8 0.8 0.8 1"/>
+        </material>
+    </visual>
+
+    <collision>
+        <geometry>
+            <cylinder radius="0.005"
+                      length="0.08"/>
+        </geometry>
+    </collision>
+
+    <inertial>
+        <origin xyz="0 0 0"/>
+        <mass value="0.03"/>
+
+        <inertia
+            ixx="0.000016"
+            iyy="0.000016"
+            izz="0.00000038"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+    </inertial>
+
+</link>
+
+<joint name="bottom_to_front_right_pillar_joint"
+       type="fixed">
+
+    <parent link="bottom_plate_link"/>
+    <child link="front_right_pillar_link"/>
+
+    <origin xyz="0.10 -0.10 0.044"
+            rpy="0 0 0"/>
+
+</joint>
+<!-- ===================================== -->
+<!-- Rear Left Pillar                      -->
+<!-- ===================================== -->
+
+<link name="rear_left_pillar_link">
+
+    <visual>
+        <geometry>
+            <cylinder radius="0.005"
+                      length="0.08"/>
+        </geometry>
+
+        <material name="silver">
+            <color rgba="0.8 0.8 0.8 1"/>
+        </material>
+    </visual>
+
+    <collision>
+        <geometry>
+            <cylinder radius="0.005"
+                      length="0.08"/>
+        </geometry>
+    </collision>
+
+    <inertial>
+        <origin xyz="0 0 0"/>
+        <mass value="0.03"/>
+
+        <inertia
+            ixx="0.000016"
+            iyy="0.000016"
+            izz="0.00000038"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+    </inertial>
+
+</link>
+
+<joint name="bottom_to_rear_left_pillar_joint"
+       type="fixed">
+
+    <parent link="bottom_plate_link"/>
+    <child link="rear_left_pillar_link"/>
+
+    <origin xyz="-0.10 0.10 0.044"
+            rpy="0 0 0"/>
+
+</joint>
+<!-- ===================================== -->
+<!-- Rear Right Pillar                     -->
+<!-- ===================================== -->
+
+<link name="rear_right_pillar_link">
+
+    <visual>
+        <geometry>
+            <cylinder radius="0.005"
+                      length="0.08"/>
+        </geometry>
+
+        <material name="silver">
+            <color rgba="0.8 0.8 0.8 1"/>
+        </material>
+    </visual>
+
+    <collision>
+        <geometry>
+            <cylinder radius="0.005"
+                      length="0.08"/>
+        </geometry>
+    </collision>
+
+    <inertial>
+        <origin xyz="0 0 0"/>
+        <mass value="0.03"/>
+
+        <inertia
+            ixx="0.000016"
+            iyy="0.000016"
+            izz="0.00000038"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+    </inertial>
+
+</link>
+
+<joint name="bottom_to_rear_right_pillar_joint"
+       type="fixed">
+
+    <parent link="bottom_plate_link"/>
+    <child link="rear_right_pillar_link"/>
+
+    <origin xyz="-0.10 -0.10 0.044"
+            rpy="0 0 0"/>
+
+</joint>
+<!-- ===================================== -->
+<!-- Middle Plate                          -->
+<!-- ===================================== -->
+
+<link name="middle_plate_link">
+
+    <!-- Visual -->
+    <visual>
+
+        <geometry>
+            <cylinder radius="0.16"
+                      length="0.008"/>
+        </geometry>
+
+        <material name="blue">
+            <color rgba="0.2 0.4 0.9 1"/>
+        </material>
+
+    </visual>
+
+    <!-- Collision -->
+    <collision>
+
+        <geometry>
+            <cylinder radius="0.16"
+                      length="0.008"/>
+        </geometry>
+
+    </collision>
+
+    <!-- Inertial -->
+    <inertial>
+
+        <origin xyz="0 0 0"/>
+
+        <mass value="0.40"/>
+
+        <inertia
+            ixx="0.0018"
+            iyy="0.0018"
+            izz="0.0053"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+
+    </inertial>
+
+</link>
+<!-- ===================================== -->
+<!-- Bottom Plate -> Middle Plate          -->
+<!-- ===================================== -->
+
+<joint name="bottom_to_middle_plate_joint"
+       type="fixed">
+
+    <parent link="bottom_plate_link"/>
+
+    <child link="middle_plate_link"/>
+
+    <origin xyz="0 0 0.084"
+            rpy="0 0 0"/>
+
+</joint>
+<!-- ===================================== -->
+<!-- Arduino Uno                           -->
+<!-- ===================================== -->
+
+<link name="arduino_uno_link">
+
+    <visual>
+
+        <geometry>
+            <box size="0.069 0.054 0.015"/>
+        </geometry>
+
+        <material name="arduino_blue">
+            <color rgba="0.0 0.35 0.75 1"/>
+        </material>
+
+    </visual>
+
+    <collision>
+
+        <geometry>
+            <box size="0.069 0.054 0.015"/>
+        </geometry>
+
+    </collision>
+
+    <inertial>
+
+        <origin xyz="0 0 0"/>
+
+        <mass value="0.025"/>
+
+        <inertia
+            ixx="0.000010"
+            iyy="0.000013"
+            izz="0.000020"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+
+    </inertial>
+
+</link>
+
+<joint name="middle_plate_to_arduino_joint"
+       type="fixed">
+
+    <parent link="middle_plate_link"/>
+
+    <child link="arduino_uno_link"/>
+
+    <!-- Left side of middle plate -->
+    <origin xyz="-0.05 0.05 0.0115"
+            rpy="0 0 0"/>
+
+</joint>
+<!-- ===================================== -->
+<!-- Raspberry Pi 4                        -->
+<!-- ===================================== -->
+
+<link name="raspberry_pi4_link">
+
+    <visual>
+
+        <geometry>
+            <box size="0.085 0.056 0.017"/>
+        </geometry>
+
+        <material name="green">
+            <color rgba="0.0 0.55 0.2 1"/>
+        </material>
+
+    </visual>
+
+    <collision>
+
+        <geometry>
+            <box size="0.085 0.056 0.017"/>
+        </geometry>
+
+    </collision>
+
+    <inertial>
+
+        <origin xyz="0 0 0"/>
+
+        <mass value="0.046"/>
+
+        <inertia
+            ixx="0.000021"
+            iyy="0.000032"
+            izz="0.000045"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+
+    </inertial>
+
+</link>
+
+<joint name="middle_plate_to_raspberry_pi4_joint"
+       type="fixed">
+
+    <parent link="middle_plate_link"/>
+
+    <child link="raspberry_pi4_link"/>
+
+    <!-- Right side of middle plate -->
+    <origin xyz="-0.05 -0.05 0.0125"
+            rpy="0 0 0"/>
+
+</joint>
+<!-- ===================================== -->
+<!-- Front Left Upper Pillar               -->
+<!-- ===================================== -->
+
+<link name="upper_front_left_pillar_link">
+
+    <visual>
+        <geometry>
+            <cylinder radius="0.005"
+                      length="0.08"/>
+        </geometry>
+
+        <material name="silver">
+            <color rgba="0.8 0.8 0.8 1"/>
+        </material>
+    </visual>
+
+    <collision>
+        <geometry>
+            <cylinder radius="0.005"
+                      length="0.08"/>
+        </geometry>
+    </collision>
+
+    <inertial>
+        <origin xyz="0 0 0"/>
+        <mass value="0.03"/>
+        <inertia
+            ixx="0.000016"
+            iyy="0.000016"
+            izz="0.00000038"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+    </inertial>
+
+</link>
+
+<joint name="middle_to_upper_front_left_pillar_joint"
+       type="fixed">
+
+    <parent link="middle_plate_link"/>
+    <child link="upper_front_left_pillar_link"/>
+
+    <origin xyz="0.10 0.10 0.044"/>
+
+</joint>
+<link name="upper_front_right_pillar_link">
+
+    <visual>
+        <geometry>
+            <cylinder radius="0.005"
+                      length="0.08"/>
+        </geometry>
+        <material name="silver">
+            <color rgba="0.8 0.8 0.8 1"/>
+        </material>
+    </visual>
+
+    <collision>
+        <geometry>
+            <cylinder radius="0.005"
+                      length="0.08"/>
+        </geometry>
+    </collision>
+
+    <inertial>
+        <origin xyz="0 0 0"/>
+        <mass value="0.03"/>
+        <inertia
+            ixx="0.000016"
+            iyy="0.000016"
+            izz="0.00000038"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+    </inertial>
+
+</link>
+
+<joint name="middle_to_upper_front_right_pillar_joint"
+       type="fixed">
+
+    <parent link="middle_plate_link"/>
+    <child link="upper_front_right_pillar_link"/>
+
+    <origin xyz="0.10 -0.10 0.044"/>
+
+</joint>
+<link name="upper_rear_left_pillar_link">
+
+    <visual>
+        <geometry>
+            <cylinder radius="0.005"
+                      length="0.08"/>
+        </geometry>
+        <material name="silver">
+            <color rgba="0.8 0.8 0.8 1"/>
+        </material>
+    </visual>
+
+    <collision>
+        <geometry>
+            <cylinder radius="0.005"
+                      length="0.08"/>
+        </geometry>
+    </collision>
+
+    <inertial>
+        <origin xyz="0 0 0"/>
+        <mass value="0.03"/>
+        <inertia
+            ixx="0.000016"
+            iyy="0.000016"
+            izz="0.00000038"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+    </inertial>
+
+</link>
+
+<joint name="middle_to_upper_rear_left_pillar_joint"
+       type="fixed">
+
+    <parent link="middle_plate_link"/>
+    <child link="upper_rear_left_pillar_link"/>
+
+    <origin xyz="-0.10 0.10 0.044"/>
+
+</joint>
+<link name="upper_rear_right_pillar_link">
+
+    <visual>
+        <geometry>
+            <cylinder radius="0.005"
+                      length="0.08"/>
+        </geometry>
+        <material name="silver">
+            <color rgba="0.8 0.8 0.8 1"/>
+        </material>
+    </visual>
+
+    <collision>
+        <geometry>
+            <cylinder radius="0.005"
+                      length="0.08"/>
+        </geometry>
+    </collision>
+
+    <inertial>
+        <origin xyz="0 0 0"/>
+        <mass value="0.03"/>
+        <inertia
+            ixx="0.000016"
+            iyy="0.000016"
+            izz="0.00000038"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+    </inertial>
+
+</link>
+
+<joint name="middle_to_upper_rear_right_pillar_joint"
+       type="fixed">
+
+    <parent link="middle_plate_link"/>
+    <child link="upper_rear_right_pillar_link"/>
+
+    <origin xyz="-0.10 -0.10 0.044"/>
+
+</joint>
+<!-- ===================================== -->
+<!-- Top Plate                             -->
+<!-- ===================================== -->
+
+<link name="top_plate_link">
+
+    <!-- Visual -->
+    <visual>
+
+        <geometry>
+            <cylinder radius="0.16"
+                      length="0.008"/>
+        </geometry>
+
+        <material name="blue">
+            <color rgba="0.2 0.4 0.9 1"/>
+        </material>
+
+    </visual>
+
+    <!-- Collision -->
+    <collision>
+
+        <geometry>
+            <cylinder radius="0.16"
+                      length="0.008"/>
+        </geometry>
+
+    </collision>
+
+    <!-- Inertial -->
+    <inertial>
+
+        <origin xyz="0 0 0"/>
+
+        <mass value="0.40"/>
+
+        <inertia
+            ixx="0.0018"
+            iyy="0.0018"
+            izz="0.0053"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+
+    </inertial>
+
+</link>
+<!-- ===================================== -->
+<!-- Middle Plate -> Top Plate             -->
+<!-- ===================================== -->
+
+<joint name="middle_to_top_plate_joint"
+       type="fixed">
+
+    <parent link="middle_plate_link"/>
+
+    <child link="top_plate_link"/>
+
+    <!--
+        Middle plate thickness = 8 mm
+        Upper pillar height = 80 mm
+        Top plate thickness = 8 mm
+
+        0.004 + 0.080 + 0.004 = 0.088
+    -->
+
+    <origin xyz="0 0 0.088"
+            rpy="0 0 0"/>
+
+</joint>
+<!-- ===================================== -->
+<!-- RPLIDAR                               -->
+<!-- ===================================== -->
+
+<link name="lidar_link">
+
+    <!-- Visual -->
+    <visual>
+
+        <geometry>
+            <cylinder radius="0.035"
+                      length="0.040"/>
+        </geometry>
+
+        <material name="lidar_black">
+            <color rgba="0.15 0.15 0.15 1"/>
+        </material>
+
+    </visual>
+
+    <!-- Collision -->
+    <collision>
+
+        <geometry>
+            <cylinder radius="0.035"
+                      length="0.040"/>
+        </geometry>
+
+    </collision>
+
+    <!-- Inertial -->
+    <inertial>
+
+        <origin xyz="0 0 0"/>
+
+        <mass value="0.17"/>
+
+        <inertia
+            ixx="0.000071"
+            iyy="0.000071"
+            izz="0.000104"
+            ixy="0"
+            ixz="0"
+            iyz="0"/>
+
+    </inertial>
+
+</link>
+<!-- ===================================== -->
+<!-- Top Plate -> LiDAR                    -->
+<!-- ===================================== -->
+<joint name="top_plate_to_lidar_joint"
+       type="fixed">
+
+    <parent link="top_plate_link"/>
+
+    <child link="lidar_link"/>
+
+    <!-- Slightly towards caster -->
+    <origin xyz="-0.05 0 0.024"
+            rpy="0 0 0"/>
+
+</joint>
+
+<!-- ===================================== -->
+<!-- Gazebo Properties                     -->
+<!-- ===================================== -->
+
+<gazebo reference="left_wheel_link">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+</gazebo>
+
+<gazebo reference="right_wheel_link">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+</gazebo>
+
+<gazebo reference="caster_wheel_link">
+    <mu1>0.3</mu1>
+    <mu2>0.3</mu2>
+</gazebo>
+
+<!-- ===================================== -->
+<!-- ros2_control                          -->
+<!-- ===================================== -->
+
+<ros2_control name="ServingRobotSystem" type="system">
+
+    <hardware>
+        <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+
+    <joint name="left_wheel_joint">
+        <command_interface name="velocity"/>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="right_wheel_joint">
+        <command_interface name="velocity"/>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+    </joint>
+
+</ros2_control>
+
+<gazebo>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+        <parameters>ROS2_CONTROLLERS_YAML_PATH</parameters>
+    </plugin>
+</gazebo>
+
+</robot>
