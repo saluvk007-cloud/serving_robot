@@ -329,7 +329,7 @@
 </link>
 
 <joint name="caster_wheel_joint"
-       type="continuous">
+       type="fixed">
 
     <parent link="caster_mount_link"/>
 
