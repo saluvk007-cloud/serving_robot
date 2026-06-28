@@ -94,10 +94,19 @@ def generate_launch_description():
         output="screen"
     )
 
+    # Cmd Vel Relay (bridges Nav2's /cmd_vel output to diff_drive_controller's actual topic)
+    cmd_vel_relay = Node(
+        package="topic_tools",
+        executable="relay",
+        arguments=["/cmd_vel", "/diff_drive_controller/cmd_vel_unstamped"],
+        output="screen"
+    )
+
     return LaunchDescription([
         gazebo,
         robot_state_publisher,
         spawn_robot,
         joint_state_broadcaster_spawner,
-        diff_drive_controller_spawner
+        diff_drive_controller_spawner,
+        cmd_vel_relay
     ])
