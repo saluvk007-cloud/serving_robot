@@ -10,6 +10,14 @@ def generate_launch_description():
 
     pkg_path = get_package_share_directory("serving_robot_description")
 
+    # Path to your custom world
+    world = os.path.join(
+        pkg_path,
+        "worlds",
+        "restaurant.world"
+    )
+
+    # Launch Gazebo with custom world
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(
@@ -17,33 +25,60 @@ def generate_launch_description():
                 "launch",
                 "gazebo.launch.py"
             )
-        )
+        ),
+        launch_arguments={
+            "world": world
+        }.items()
     )
 
-    urdf_file = os.path.join(pkg_path, "urdf", "serving_robot.urdf")
-    config_path = os.path.join(pkg_path, "config", "ros2_controllers.yaml")
+    # URDF
+    urdf_file = os.path.join(
+        pkg_path,
+        "urdf",
+        "serving_robot.urdf"
+    )
+
+    # ros2_control config
+    config_path = os.path.join(
+        pkg_path,
+        "config",
+        "ros2_controllers.yaml"
+    )
 
     with open(urdf_file, "r") as file:
         robot_description = file.read()
 
     robot_description = robot_description.replace(
-        "ROS2_CONTROLLERS_YAML_PATH", config_path
+        "ROS2_CONTROLLERS_YAML_PATH",
+        config_path
     )
 
+    # Robot State Publisher
     robot_state_publisher = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
-        parameters=[{"robot_description": robot_description}],
+        parameters=[
+            {
+                "robot_description": robot_description
+            }
+        ],
         output="screen"
     )
 
+    # Spawn Robot
     spawn_robot = Node(
         package="gazebo_ros",
         executable="spawn_entity.py",
-        arguments=["-entity", "serving_robot", "-topic", "robot_description"],
+        arguments=[
+            "-entity",
+            "serving_robot",
+            "-topic",
+            "robot_description"
+        ],
         output="screen"
     )
 
+    # Joint State Broadcaster
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -51,6 +86,7 @@ def generate_launch_description():
         output="screen"
     )
 
+    # Diff Drive Controller
     diff_drive_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
